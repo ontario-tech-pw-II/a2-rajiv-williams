@@ -1,16 +1,23 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
 int main(int argc, char const *argv[])
 {
- 	ifstream fin;
- 	ofstream fout;
 	
 	// check if there are enough arguments
-	
+	if((argc < 3)||(argc > 3)){
+        cerr << "Error: Three command line arguments required" << endl;
+    }
+    else if(argc == 3){
 	
 	// open the first file
- 	
+ 	ifstream inputFile(argv[1]);//2nd value in argv[]
+    
 	char c;
 
- 	if (fin.fail()) // check if it is successful 
+ 	if (inputFile.fail()) // check if it is successful 
  	{
  		cerr << " Cannot open the input file!" << endl;
  		return 1;
@@ -18,21 +25,19 @@ int main(int argc, char const *argv[])
  	
 
 	// open the second file
-	
- 	if (fout.fail())
+	ofstream outputFile(argv[2]);//3rd value in argv[]
+ 	if (outputFile.fail())
  	{
  		cerr << " Cannot open the output file!" << endl;
  		return 1;
  	}
  	
- 	while(fin.get(c)) 
+ 	while(inputFile.get(c)) 
 	{
-		fout << c;
+		outputFile << c;
 	}
+    }
  	
- 	fin.close(); 
-
- 	fout.close();
 
  	 return 0;
 
